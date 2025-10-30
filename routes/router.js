@@ -18,7 +18,7 @@ router.get('/', (req, res)=> {
 
             res.render('pages/home', {
                 title: "LaTorya's Jokes App",
-                name: "latorya's jokes app!",
+                name: "LaTorya's jokes app!",
                 joke: getJoke(resp.data)
             })
         })
