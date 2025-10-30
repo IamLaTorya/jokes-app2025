@@ -3,6 +3,8 @@ const router = express.Router()
 const axios = require('axios')
 const getJoke = require('../helpers/getJoke')
 
+router.use(express.static('public'))
+
 // http://localhost:3001 => home page
 router.get('/', (req, res)=> {
     // res.send('working...') => display home page
@@ -16,7 +18,7 @@ router.get('/', (req, res)=> {
 
             res.render('pages/home', {
                 title: "LaTorya's Jokes App",
-                name: "laTorya's jokes app!",
+                name: "latorya's jokes app!",
                 joke: getJoke(resp.data)
             })
         })

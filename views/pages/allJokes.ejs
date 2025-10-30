@@ -18,13 +18,15 @@
                 <div class="col">
                     <div class="card h-100">
                         <div class="card-body">
-                            <h2 class="card-title">
+                            <h2 class="card-title h2-joke">
                                 <%= joke.setup %>
                             </h2>
                         </div>
                         <div class="card-footer">
                             <p class="card-text">
-                                <%= joke.punchline %>
+                                Click 
+                                <a href="/jokes/<%= joke.id %>" class="joke-link">here</a>
+                                for the punchline!
                             </p>
                         </div>
                     </div>

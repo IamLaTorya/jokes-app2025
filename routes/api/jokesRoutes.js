@@ -2,11 +2,12 @@ const express = require('express')
 const router = express.Router()
 const axios = require('axios')
 const { paginationResults, buildJokeArr } = require('../../helpers/pagination')
+const getGif = require('../../helpers/getGif')
 const PORT = process.env.PORT || 3001
 
 // http://localhost:3001/jokes
 router.get('/', (req, res)=> {
-    // res.send('This works')
+
     const url = `https://api.sampleapis.com/jokes/goodJokes`
     /** pagination...🤞🏾 */
     const pageData = paginationResults(req)
@@ -54,6 +55,28 @@ router.get('/type/:type', (req, res)=> {
                 data: jokeArrData.arr,
                 prev: jokeArrData.prev,
                 next: jokeArrData.next
+            })
+        })
+})
+
+// Single joke
+router.get('/:id', (req, res)=> {
+
+    const id = req.params.id
+
+    const url = `https://api.sampleapis.com/jokes/goodJokes/${id}`
+
+    axios.get(url)
+        .then(resp => {
+            const joke = resp.data
+            res.render('pages/singleJoke', {
+                title: joke.setup,
+                name: joke.setup,
+                punchline: joke.punchline,
+                prev: joke.id == 7 ? 3 : joke.id - 1,
+                next: joke.id == 3 ? 7 : joke.id + 1,
+                gif: getGif(),
+                id: joke.id
             })
         })
 })
